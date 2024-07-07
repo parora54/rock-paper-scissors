@@ -60,6 +60,13 @@ function playGame() {
                 resetButton.remove()
             })
 
+            resetButton.addEventListener("mouseover", () => {
+                resetButton.style.backgroundColor = 'blue';
+            })
+            resetButton.addEventListener("mouseout", () => {
+                resetButton.style.backgroundColor = 'cornflowerblue';
+            })
+
             if (humanScore == 3) {
                 winner.textContent = ("GAME OVER, PLAYER WINS!!!")
                 imageArea.removeChild(emoji)
@@ -92,6 +99,12 @@ function playGame() {
                 playRound(button.id, cpu)
             }        
         });
+        button.addEventListener("mouseover", () => {
+            button.style.backgroundColor = 'blue';
+        })
+        button.addEventListener("mouseout", () => {
+            button.style.backgroundColor = 'cornflowerblue';
+        })
     })
 
 }
