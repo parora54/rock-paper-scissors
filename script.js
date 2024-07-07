@@ -1,5 +1,3 @@
-console.log("Hello There! Welcome to Rock Paper Scissors!");
-
 function getComputerChoice() {
     let int = Math.floor(Math.random() * 3);
     let choice;
@@ -15,60 +13,87 @@ function getComputerChoice() {
     return choice;
 }
 
-function getHumanChoice() {
-    let user = String(prompt("Type 'rock', 'paper', or 'scissors'."));
-    user = user.toLowerCase();
-
-    switch (user) {
-        case "rock":
-            return "rock"
-        case "scissors":
-            return "scissors"
-        case "paper":
-            return "paper"
-        default:
-            getHumanChoice();
-    }
-}
-
 function playGame() {
+    const feedback = document.querySelector(".feedback");
+    const winner = document.querySelector(".winner");
+    const human = document.querySelector("#human");
+    const computer = document.querySelector("#cpu");
+    const buttons = document.querySelectorAll('.choice');
+    const reset = document.querySelector(".reset");
+    const imageArea = document.querySelector(".emojis")
+    const emoji = document.querySelector("#default");
+    const winEmoji = document.createElement("img")
+    winEmoji.src = "./images/win.jpeg"
+    const loseEmoji = document.createElement("img")
+    loseEmoji.src = "./images/lose.jpg"
 
     let humanScore = 0;
     let computerScore = 0;
 
     function playRound(humanChoice, computerChoice) {
-        console.log(`You chose: ${humanChoice}`);
-        console.log(`Computer chose: ${computerChoice}`);
     
         if (
             (humanChoice === "rock" && computerChoice === "scissors") ||
             (humanChoice === "paper" && computerChoice === "rock") ||
             (humanChoice === "scissors" && computerChoice === "paper")
         ) {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+            winner.textContent = (`You win! ${humanChoice} beats ${computerChoice}`);
             humanScore++;
         } else if (humanChoice === computerChoice) {
-            console.log("It's a tie!");
+            winner.textContent = ("It's a tie!");
         } else {
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+            winner.textContent = (`You lose! ${computerChoice} beats ${humanChoice}`);
             computerScore++;
         }
-    
-        console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
+
+        human.textContent = humanScore;
+        computer.textContent = computerScore;
+
+        if (humanScore == 3 || computerScore == 3) {
+            const resetButton = document.createElement("button")
+            resetButton.textContent = "PLAY NEW GAME"
+
+            reset.appendChild(resetButton);
+
+            resetButton.addEventListener("click", () => {
+                newGame();
+                resetButton.remove()
+            })
+
+            if (humanScore == 3) {
+                winner.textContent = ("GAME OVER, PLAYER WINS!!!")
+                imageArea.removeChild(emoji)
+                imageArea.appendChild(winEmoji)
+            }
+            else {
+                winner.textContent = ("GAME OVER, CPU WINS!!!")
+                imageArea.removeChild(emoji)
+                imageArea.appendChild(loseEmoji)
+            }
+        }
     }
 
-    while (humanScore < 3 && computerScore < 3) {
-        const cpu = getComputerChoice()
-        const human = getHumanChoice()
-        playRound(human, cpu)
+    function newGame() {
+        humanScore = 0;
+        computerScore = 0;
+        human.textContent = humanScore;
+        computer.textContent = computerScore;
+        feedback.textContent = null;
+        winner.textContent = null;
+        imageArea.removeChild(imageArea.lastElementChild)
+        imageArea.appendChild(emoji)
     }
 
-    if (humanScore == 3) {
-        console.log("GAME OVER, PLAYER WINS!!!")
-    }
-    else {
-        console.log("GAME OVER, CPU WINS!!!")
-    }
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (!(humanScore >= 3 || computerScore >= 3)) {
+                const cpu = getComputerChoice()
+                feedback.textContent = `You chose: ${button.id}, Computer chose: ${cpu}`
+                playRound(button.id, cpu)
+            }        
+        });
+    })
+
 }
 
 playGame();

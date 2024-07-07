@@ -1,0 +1,47 @@
+/* style.css */
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+div {
+    margin: 16px;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+}
+
+button {
+    margin-left: 32px;
+    margin-right: 32px;
+    border: solid white 2px;
+    border-radius: 4px;
+    background-color: cornflowerblue;
+    color: white;
+    height: 50px;
+    width: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.feedback {
+    margin-top: 32px;
+}
+
+span {
+    font-weight: bold;
+}
+
+.results {
+    margin-top: 64px;
+}
+
+.results .scores {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 16px;
+}

@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
+    <div>
+        <h1>Welcome to Rock Paper Scissors!</h1>
+    </div>
+    <div class="emojis">
+        <img id="default" src="./images/new.jpg">
+    </div>
+    <div id="wrapper">
+        <div class="label">
+            Pick a choice!
+        </div>
+        <div class="buttons">
+            <button id="rock" class="choice">ROCK</button>
+            <button id="paper" class="choice">PAPER</button>
+            <button id="scissors" class="choice">SCISSORS</button>
+        </div>
+    </div>
+    <div class="feedback">
+
+    </div>
+    <div class="results">
+        <h2>SCORES</h2>
+        <div class="scores">
+            <div>
+                You: <span id="human"></span>
+            </div>
+            <div>
+                CPU: <span id="cpu"></span>
+            </div>
+        </div>
+        <div class="winner">
+
+        </div>
+    </div>
+    <div class="reset">
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
